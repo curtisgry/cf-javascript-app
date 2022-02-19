@@ -15,3 +15,11 @@ const pokemonList = [
                 types: ['water'],
         },
 ];
+
+// Display info from all pokemon in list
+for (let i = 0; i < pokemonList.length; i++) {
+        // Additional text for height over 0.6
+        const specialText = pokemonList[i].height > 0.6 ? 'Wow thats big!' : '';
+        // Write to page
+        document.write(`${pokemonList[i].name} (height:${pokemonList[i].height}) ${specialText} <br>`);
+}
