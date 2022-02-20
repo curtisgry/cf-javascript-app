@@ -18,10 +18,12 @@ const pokemonRepository = (function () {
                 },
         ];
 
+        // Gets pokemon list from IIFE
         function getAll() {
                 return pokemonList;
         }
 
+        // Adds item to pokemon list
         function add(item) {
                 // Stop if not an object
                 if (typeof item !== 'object') {
@@ -34,6 +36,7 @@ const pokemonRepository = (function () {
                 }
         }
 
+        // Finds item in pokemon list
         function find(name) {
                 // Get new array with pokemon name that matches string input
                 const result = pokemonList.filter(function (item) {
@@ -46,24 +49,33 @@ const pokemonRepository = (function () {
                 return result;
         }
 
+        // Adds list of buttons to page
+        function addListItem(pokemon) {
+                // List container
+                const listContainer = document.querySelector('.pokemon-list');
+
+                // New elements
+                const listItem = document.createElement('li');
+                const button = document.createElement('button');
+
+                // Set button text and add class
+                button.innerText = pokemon.name;
+                button.classList.add('button');
+
+                // Append to list
+                listItem.append(button);
+                listContainer.append(listItem);
+        }
+
         return {
                 getAll,
                 add,
                 find,
+                addListItem,
         };
 })();
 
-// Test add pokemon to list
-pokemonRepository.add({
-        name: 'Pikachu',
-        height: 0.5,
-        types: ['electric'],
-});
-
-// Get list from within IIFE and display info from all pokemon in list
-pokemonRepository.getAll().forEach(function (item) {
-        // Check for height over 0.6 to display additional text
-        const specialText = item.height > 0.6 ? 'Wow thats big!' : '';
-        // Write to page
-        document.write(`<p>${item.name} (height: ${item.height}) <span>${specialText}</span></p>`);
+// Make list items on page from current pokemon list
+pokemonRepository.getAll().forEach(function (pokemon) {
+        pokemonRepository.addListItem(pokemon);
 });
