@@ -49,6 +49,18 @@ const pokemonRepository = (function () {
                 return result;
         }
 
+        // Shows details of selected pokemon
+        function showDetails(pokemon) {
+                console.log(pokemon);
+        }
+
+        // Adds event listener for pokemon button
+        function addButtonEvent(button, pokemon) {
+                button.addEventListener('click', function () {
+                        showDetails(pokemon);
+                });
+        }
+
         // Adds list of buttons to page
         function addListItem(pokemon) {
                 // List container
@@ -57,6 +69,9 @@ const pokemonRepository = (function () {
                 // New elements
                 const listItem = document.createElement('li');
                 const button = document.createElement('button');
+
+                // Event listener on list buttons for show details
+                addButtonEvent(button, pokemon);
 
                 // Set button text and add class
                 button.innerText = pokemon.name;
