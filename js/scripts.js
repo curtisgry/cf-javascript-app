@@ -34,9 +34,22 @@ const pokemonRepository = (function () {
                 }
         }
 
+        function find(name) {
+                // Get new array with pokemon name that matches string input
+                const result = pokemonList.filter(function (item) {
+                        // Check non case sensitive for item with the name input
+                        if (item.name.toLowerCase() === name.toLowerCase()) {
+                                return true;
+                        }
+                        return false;
+                });
+                return result;
+        }
+
         return {
                 getAll,
                 add,
+                find,
         };
 })();
 
