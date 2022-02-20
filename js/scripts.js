@@ -17,9 +17,9 @@ const pokemonList = [
 ];
 
 // Display info from all pokemon in list
-for (let i = 0; i < pokemonList.length; i++) {
-        // Additional text for height over 0.6
-        const specialText = pokemonList[i].height > 0.6 ? ' Wow thats big!' : '';
+pokemonList.forEach(function (item) {
+        // Check for height over 0.6 to display additional text
+        const specialText = item.height > 0.6 ? 'Wow thats big!' : '';
         // Write to page
-        document.write(`<p>${pokemonList[i].name} (height:${pokemonList[i].height})<span>${specialText}</span></p>`);
-}
+        document.write(`<p>${item.name} (height: ${item.height}) <span>${specialText}</span></p>`);
+});
