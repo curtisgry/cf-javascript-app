@@ -1,3 +1,4 @@
+// Initialize pokemon repository
 const pokemonRepository = (function () {
         const pokemonList = [
                 {
@@ -22,7 +23,15 @@ const pokemonRepository = (function () {
         }
 
         function add(item) {
-                pokemonList.push(item);
+                // Stop if not an object
+                if (typeof item !== 'object') {
+                        return;
+                }
+                // Get keys from object and check the correct format exists
+                const keys = Object.keys(item);
+                if (keys.indexOf('name') !== -1 && keys.indexOf('height') !== -1 && keys.indexOf('types') !== -1) {
+                        pokemonList.push(item);
+                }
         }
 
         return {
@@ -30,6 +39,13 @@ const pokemonRepository = (function () {
                 add,
         };
 })();
+
+// Test add pokemon to list
+pokemonRepository.add({
+        name: 'Pikachu',
+        height: 0.5,
+        types: ['electric'],
+});
 
 // Get list from within IIFE and display info from all pokemon in list
 pokemonRepository.getAll().forEach(function (item) {
