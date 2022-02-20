@@ -1,22 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Bubblegum Sans', cursive;
 }
 
+/* Main app container */
+.app {
+    height: 100vh;
+    padding: 20px;
+    background-color: #FFCC00;
+    border: 2px solid #0A285F;
+}
+
+h1 {
+    margin: 0;
+}
+
+
 ul {
+    padding: 0;
+    margin: 10px 0;
     list-style-type: none;
-    padding: 10px;
+
 }
 
 li {
+    display: block;
     margin-bottom: 10px;
 }
 
 
-
-button {
-    padding: 5px 18px;
+/* Base button styles */
+.button {
+    text-align: left;
+    width: 100%;
+    padding: 10px 18px;
     border: none;
     border-radius: 4px;
     background-color: #0075BE;
     color: #FFCC00;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.button:hover,
+.button:focus {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
