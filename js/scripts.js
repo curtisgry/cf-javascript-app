@@ -30,8 +30,24 @@ const pokemonRepository = (function () {
                 return result;
         }
 
-        // Gets more details for single pokemon
+        // Shows a loading message on the page
+        function showLoadingMessage() {
+                const loadMessage = document.createElement('h2');
+                loadMessage.classList.add('load-message');
+                loadMessage.innerText = 'Loading...';
+                const container = document.querySelector('.app');
+                container.append(loadMessage);
+        }
+
+        // Removes the loading message from the page
+        function hideLoadingMessage() {
+                const loadMessage = document.querySelector('.load-message');
+                loadMessage.remove();
+        }
+
+        // Gets more details for single pokemon from API
         function loadDetails(item) {
+                showLoadingMessage();
                 return fetch(item.detailsUrl)
                         .then(function (response) {
                                 return response.json();
@@ -40,12 +56,15 @@ const pokemonRepository = (function () {
                                 item.imageUrl = details.sprites.front_default;
                                 item.height = details.height;
                                 item.types = details.types;
+                                hideLoadingMessage();
                         })
                         .catch(function (e) {
+                                hideLoadingMessage();
                                 console.error(e);
                         });
         }
 
+        // Logs details for a pokemon
         function showDetails(pokemon) {
                 loadDetails(pokemon).then(function () {
                         console.log(pokemon);
@@ -82,11 +101,13 @@ const pokemonRepository = (function () {
 
         // Loads list of 150 pokemon
         function loadList() {
+                showLoadingMessage();
                 return fetch(apiUrl)
                         .then(function (response) {
                                 return response.json();
                         })
                         .then(function (json) {
+                                hideLoadingMessage();
                                 json.results.forEach(function (item) {
                                         const pokemon = {
                                                 name: item.name,
@@ -96,6 +117,7 @@ const pokemonRepository = (function () {
                                 });
                         })
                         .catch(function (e) {
+                                hideLoadingMessage();
                                 console.error(e);
                         });
         }
