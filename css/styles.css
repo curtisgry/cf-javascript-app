@@ -4,13 +4,13 @@
 
 body {
     font-family: 'Bubblegum Sans', cursive;
+    background-color: #FFCC00;
 }
 
 /* Main app container */
 .app {
     height: 100vh;
     padding: 20px;
-    background-color: #FFCC00;
     border: 2px solid #0A285F;
 }
 
