@@ -138,7 +138,6 @@ const pokemonRepository = (function () {
         // Loads in details for a pokemon and shows modal
         function showDetails(pokemon) {
                 loadDetails(pokemon).then(function () {
-                        console.log(pokemon);
                         const { name, imageUrl, types, height } = pokemon;
                         const typesList = types.map((item) => item.type.name).join(', ');
                         const textContent = `
