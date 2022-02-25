@@ -3,6 +3,17 @@ const pokemonRepository = (function () {
         const pokemonList = [];
         const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
+        // Modal container div
+        const modalContainer = document.querySelector('#modal-container');
+
+        // ****Utility functions****
+        function upperCaseFirstLetter(str) {
+                const arr = str.split('');
+                arr[0] = arr[0].toUpperCase();
+                return arr.join('');
+        }
+        // ****Utility functions****
+
         // Gets pokemon list from IIFE
         function getAll() {
                 return pokemonList;
@@ -64,10 +75,76 @@ const pokemonRepository = (function () {
                         });
         }
 
-        // Logs details for a pokemon
+        // ********MODAL**********
+        function hideModal() {
+                modalContainer.classList.remove('is-visible');
+        }
+
+        function showModal(title, text, imgSrc) {
+                // Clear modal content
+                modalContainer.innerHTML = '';
+
+                // Create modal elements
+                const modal = document.createElement('div');
+                const modalTitle = document.createElement('h2');
+                const modalText = document.createElement('p');
+                const modalImage = document.createElement('img');
+                const modalClose = document.createElement('button');
+
+                // Set classes
+                modal.classList.add('modal');
+                modalTitle.classList.add('modal-title');
+                modalText.classList.add('modal-text');
+                modalImage.classList.add('modal-image');
+                modalClose.classList.add('modal-close');
+
+                // Add content
+                modalTitle.innerText = title || '';
+                modalText.innerText = text || '';
+                modalClose.innerText = 'Close';
+                modalImage.setAttribute('src', imgSrc);
+
+                // Close event listener
+                modalClose.addEventListener('click', hideModal);
+
+                // Add elements t0 modal
+                modal.appendChild(modalClose);
+                modal.appendChild(modalTitle);
+                modal.appendChild(modalText);
+                modal.appendChild(modalImage);
+
+                // Add modal to container
+                modalContainer.appendChild(modal);
+
+                modalContainer.classList.add('is-visible');
+        }
+
+        // Click outside to close
+        modalContainer.addEventListener('click', function (e) {
+                if (e.target === modalContainer) {
+                        hideModal();
+                }
+        });
+
+        // Esc key to close
+        window.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                        hideModal();
+                }
+        });
+
+        // ********MODAL**********
+
+        // Loads in details for a pokemon and shows modal
         function showDetails(pokemon) {
                 loadDetails(pokemon).then(function () {
                         console.log(pokemon);
+                        const { name, imageUrl, types, height } = pokemon;
+                        const typesList = types.map((item) => item.type.name).join(', ');
+                        const textContent = `
+                            Height - ${height}. Type - ${typesList}.
+                        `;
+                        showModal(name, textContent, imageUrl);
                 });
         }
 
@@ -109,8 +186,9 @@ const pokemonRepository = (function () {
                         .then(function (json) {
                                 hideLoadingMessage();
                                 json.results.forEach(function (item) {
+                                        // Create pokemon object from data
                                         const pokemon = {
-                                                name: item.name,
+                                                name: upperCaseFirstLetter(item.name),
                                                 detailsUrl: item.url,
                                         };
                                         add(pokemon);
