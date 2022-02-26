@@ -5,7 +5,8 @@ const pokemonRepository = (function () {
 
         // Modal bootstrap elements
         const modalTitle = document.querySelector('.modal-title');
-        const modalBody = document.querySelector('.lead');
+        const modalDetailHeight = document.querySelector('#height');
+        const modalDetailType = document.querySelector('#type');
         const modalImage = document.querySelector('.img-thumbnail');
 
         // ****Utility functions****
@@ -82,11 +83,13 @@ const pokemonRepository = (function () {
         function showModal(title, text, imgSrc) {
                 // Clear modal content
                 modalTitle.innerText = '';
-                modalBody.innerText = '';
+                modalDetailHeight.innerText = '';
+                modalDetailType.innerText = '';
 
                 // Add content
                 modalTitle.innerText = title || '';
-                modalBody.innerText = text || '';
+                modalDetailHeight.innerText = text.height || '';
+                modalDetailType.innerText = text.types || '';
                 modalImage.setAttribute('src', imgSrc);
         }
 
@@ -96,10 +99,11 @@ const pokemonRepository = (function () {
         function showDetails(pokemon) {
                 loadDetails(pokemon).then(function () {
                         const { name, imageUrl, types, height } = pokemon;
-                        const typesList = types.map((item) => item.type.name).join(', ');
-                        const textContent = `
-                            Height - ${height}. Type - ${typesList}.
-                        `;
+                        const typesList = types.map((item) => upperCaseFirstLetter(item.type.name)).join(', ');
+                        const textContent = {
+                                height: `Height - ${height}`,
+                                types: `Type - ${typesList}`
+                        }
                         showModal(name, textContent, imageUrl);
                 });
         }
@@ -121,7 +125,7 @@ const pokemonRepository = (function () {
                 const button = document.createElement('button');
                 button.setAttribute('data-toggle', 'modal');
                 button.setAttribute('data-target', '#infoModal');
-                listItem.classList.add('list-group-item');
+                listItem.classList.add('list-group-item', 'col-2');
 
                 // Event listener on list buttons for show details
                 addButtonEvent(button, pokemon);
