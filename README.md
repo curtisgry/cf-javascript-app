@@ -12,8 +12,6 @@ A web application to see information about Pokemon.
   - [Continued development](#continued-development)
 - [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 This application was made using the fetch API to get the necessary information from https://pokeapi.co into the list displayed on the page. It is a list of buttons that when clicked will show you some details about that Pokemon. The list can be filtered with the search box to find specific Pokemon.
