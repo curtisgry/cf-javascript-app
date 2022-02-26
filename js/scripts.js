@@ -8,6 +8,7 @@ const pokemonRepository = (function () {
 
         searchInput.addEventListener('input', (e) => {
                 const listContainer = document.querySelector('.pokemon-list');
+                // brings back full list when search box is empty
                 if(!e.target.value) {
                         listContainer.innerHTML = '';
                         pokemonList.forEach(function(pokemon){
@@ -15,10 +16,12 @@ const pokemonRepository = (function () {
                         })
                         return;
                 }
+
+
                 const newList = find(e.target.value)
-             
                 listContainer.innerHTML = '';
      
+                // generate new list with elements from search
                 newList.forEach(function (item) {
                         addListItem(item)
                 })
@@ -57,9 +60,10 @@ const pokemonRepository = (function () {
         function find(name) {
                 // Get new array with pokemon name that matches string input
                 if(!name) return;
+                const regex = new RegExp(name, 'gi')
                 const result = pokemonList.filter(function (item) {
-                        // Check non case sensitive for item with the name input
-                        if (item.name.includes(upperCaseFirstLetter(name))) {
+                        // Check for match with regex for search
+                        if (item.name.match(regex)) {
                                 return true;
                         }
                         return false;
