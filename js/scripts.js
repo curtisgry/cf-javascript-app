@@ -202,7 +202,7 @@ const pokemonRepository = (function () {
 })();
 
 
-
+// Load all 150 pokemon and generate list
 pokemonRepository.loadList().then(function () {
         pokemonRepository.getAll().forEach(function (pokemon) {
                 pokemonRepository.addListItem(pokemon);
