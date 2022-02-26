@@ -6,7 +6,7 @@ const pokemonRepository = (function () {
         // Search input
         const searchInput = document.querySelector('input')
 
-        searchInput.addEventListener('input', (e) => {
+        searchInput.addEventListener('input', function(e){
                 const listContainer = document.querySelector('.pokemon-list');
                 // brings back full list when search box is empty
                 if(!e.target.value) {
