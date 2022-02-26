@@ -3,8 +3,10 @@ const pokemonRepository = (function () {
         const pokemonList = [];
         const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-        // Modal container div
-        const modalContainer = document.querySelector('#modal-container');
+        // Modal bootstrap elements
+        const modalTitle = document.querySelector('.modal-title');
+        const modalBody = document.querySelector('.lead');
+        const modalImage = document.querySelector('.img-thumbnail');
 
         // ****Utility functions****
         function upperCaseFirstLetter(str) {
@@ -82,49 +84,14 @@ const pokemonRepository = (function () {
 
         function showModal(title, text, imgSrc) {
                 // Clear modal content
-                modalContainer.innerHTML = '';
-
-                // Create modal elements
-                const modal = document.createElement('div');
-                const modalTitle = document.createElement('h2');
-                const modalText = document.createElement('p');
-                const modalImage = document.createElement('img');
-                const modalClose = document.createElement('button');
-
-                // Set classes
-                modal.classList.add('modal');
-                modalTitle.classList.add('modal-title');
-                modalText.classList.add('modal-text');
-                modalImage.classList.add('modal-image');
-                modalClose.classList.add('modal-close');
+                modalTitle.innerText = '';
+                modalBody.innerText = '';
 
                 // Add content
                 modalTitle.innerText = title || '';
-                modalText.innerText = text || '';
-                modalClose.innerText = 'Close';
+                modalBody.innerText = text || '';
                 modalImage.setAttribute('src', imgSrc);
-
-                // Close event listener
-                modalClose.addEventListener('click', hideModal);
-
-                // Add elements t0 modal
-                modal.appendChild(modalClose);
-                modal.appendChild(modalTitle);
-                modal.appendChild(modalText);
-                modal.appendChild(modalImage);
-
-                // Add modal to container
-                modalContainer.appendChild(modal);
-
-                modalContainer.classList.add('is-visible');
         }
-
-        // Click outside to close
-        // modalContainer.addEventListener('click', function (e) {
-        //         if (e.target === modalContainer) {
-        //                 hideModal();
-        //         }
-        // });
 
         // Esc key to close
         window.addEventListener('keydown', function (e) {
