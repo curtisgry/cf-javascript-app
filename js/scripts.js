@@ -163,7 +163,7 @@ const pokemonRepository = (function () {
 
                 // Set button text and add class
                 button.innerText = pokemon.name;
-                button.classList.add('button', 'btn');
+                button.classList.add('button', 'btn', 'btn-block');
 
                 // Append to list
                 listItem.append(button);
