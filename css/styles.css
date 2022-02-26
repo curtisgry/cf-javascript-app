@@ -7,6 +7,10 @@ body {
     background-color: #FFCC00;
 }
 
+ul {
+    padding: 0;
+}
+
 /* Bootstrap navbar additional styles */
 .navbar {
     background-color: #0075BE;
