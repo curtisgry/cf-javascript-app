@@ -4,7 +4,7 @@
 
 body {
     font-family: 'Bubblegum Sans', cursive;
-    background-color: #FFCC00;
+    background-color: #949390;
 }
 
 .navbar {
@@ -18,7 +18,7 @@ body {
 /* Base button styles */
 .button {
     background-color: #0075BE;
-    color: #FFCC00;
+    color: white;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     transition: all 0.1s;
 }
