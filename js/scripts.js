@@ -1,9 +1,31 @@
 // Initialize pokemon repository
 const pokemonRepository = (function () {
-        const pokemonList = [];
+        let pokemonList = [];
         const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
+        // Search input
+        const searchInput = document.querySelector('input')
+
+        searchInput.addEventListener('input', (e) => {
+                const listContainer = document.querySelector('.pokemon-list');
+                if(!e.target.value) {
+                        listContainer.innerHTML = '';
+                        pokemonList.forEach(function(pokemon){
+                                addListItem(pokemon)
+                        })
+                        return;
+                }
+                const newList = find(e.target.value)
+             
+                listContainer.innerHTML = '';
+     
+                newList.forEach(function (item) {
+                        addListItem(item)
+                })
+        })
+
         // Modal bootstrap elements
+        const modalContainer = document.querySelector('.modal-content')
         const modalTitle = document.querySelector('.modal-title');
         const modalDetailHeight = document.querySelector('#height');
         const modalDetailType = document.querySelector('#type');
@@ -34,9 +56,10 @@ const pokemonRepository = (function () {
         // Finds item in pokemon list
         function find(name) {
                 // Get new array with pokemon name that matches string input
+                if(!name) return;
                 const result = pokemonList.filter(function (item) {
                         // Check non case sensitive for item with the name input
-                        if (item.name.toLowerCase() === name.toLowerCase()) {
+                        if (item.name.includes(upperCaseFirstLetter(name))) {
                                 return true;
                         }
                         return false;
@@ -45,12 +68,11 @@ const pokemonRepository = (function () {
         }
 
         // Shows a loading message on the page
-        function showLoadingMessage() {
+        function showLoadingMessage(element) {
                 const loadMessage = document.createElement('h2');
                 loadMessage.classList.add('load-message');
                 loadMessage.innerText = 'Loading...';
-                const container = document.querySelector('.app');
-                container.append(loadMessage);
+                element.appendChild(loadMessage);
         }
 
         // Removes the loading message from the page
@@ -61,19 +83,18 @@ const pokemonRepository = (function () {
 
         // Gets more details for single pokemon from API
         function loadDetails(item) {
-                showLoadingMessage();
+                showLoadingMessage(modalContainer);
                 return fetch(item.detailsUrl)
                         .then(function (response) {
+                                hideLoadingMessage()
                                 return response.json();
                         })
                         .then(function (details) {
                                 item.imageUrl = details.sprites.front_default;
                                 item.height = details.height;
                                 item.types = details.types;
-                                hideLoadingMessage();
                         })
                         .catch(function (e) {
-                                hideLoadingMessage();
                                 console.error(e);
                         });
         }
@@ -97,7 +118,13 @@ const pokemonRepository = (function () {
 
         // Loads in details for a pokemon and shows modal
         function showDetails(pokemon) {
+                modalTitle.innerText = '';
+                modalDetailHeight.innerText = '';
+                modalDetailType.innerText = '';
+                modalImage.setAttribute('src', '');
+                
                 loadDetails(pokemon).then(function () {
+                       
                         const { name, imageUrl, types, height } = pokemon;
                         const typesList = types.map((item) => upperCaseFirstLetter(item.type.name)).join(', ');
                         const textContent = {
@@ -141,13 +168,11 @@ const pokemonRepository = (function () {
 
         // Loads list of 150 pokemon
         function loadList() {
-                showLoadingMessage();
                 return fetch(apiUrl)
                         .then(function (response) {
                                 return response.json();
                         })
                         .then(function (json) {
-                                hideLoadingMessage();
                                 json.results.forEach(function (item) {
                                         // Create pokemon object from data
                                         const pokemon = {
@@ -158,7 +183,6 @@ const pokemonRepository = (function () {
                                 });
                         })
                         .catch(function (e) {
-                                hideLoadingMessage();
                                 console.error(e);
                         });
         }
@@ -172,6 +196,8 @@ const pokemonRepository = (function () {
                 loadDetails,
         };
 })();
+
+
 
 pokemonRepository.loadList().then(function () {
         pokemonRepository.getAll().forEach(function (pokemon) {
