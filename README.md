@@ -30,8 +30,6 @@ Users are able to:
 
 ### Links
 
--GitHub Repo [Here](https://github.com/curtisgry/cf-javascript-app)
-
 - Live Site URL: [Here](https://curtisgry.github.io/cf-javascript-app/)
 
 ### Built with
