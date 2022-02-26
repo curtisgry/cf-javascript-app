@@ -5,16 +5,8 @@
 body {
     font-family: 'Bubblegum Sans', cursive;
     background-color: #FFCC00;
-    border: 2px solid #0A285F;
 }
 
-/* Main app container */
-.app {
-    width: 90%;
-    max-width: 700px;
-    padding: 20px;
-    margin: 0 auto;
-}
 
 h1 {
     margin: 0;
@@ -51,10 +43,11 @@ li {
 .button:focus {
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
     background-color: #e4000f;
+    color: white;
 }
 
 /* MODAL */
-
+/* 
 #modal-container {
     position: fixed;
     padding: 20px;
@@ -72,19 +65,13 @@ li {
 
 #modal-container.is-visible {
     display: grid;
-}
+} */
 
-.modal {
-    position: relative;
-    margin: auto;
+.modal-content {
     background-color: #FFCC00;
-    display: inline-block;
-    padding: 15px;
-    width: 100%;
-    max-width: 500px;
 }
 
-.modal-close {
+/* .modal-close {
    position: absolute;
    right: 15px;
    border: none;
@@ -98,4 +85,4 @@ li {
 .modal-close:focus {
     text-decoration: none;
     opacity: 0.5;
-}
+}  */

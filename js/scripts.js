@@ -120,11 +120,11 @@ const pokemonRepository = (function () {
         }
 
         // Click outside to close
-        modalContainer.addEventListener('click', function (e) {
-                if (e.target === modalContainer) {
-                        hideModal();
-                }
-        });
+        // modalContainer.addEventListener('click', function (e) {
+        //         if (e.target === modalContainer) {
+        //                 hideModal();
+        //         }
+        // });
 
         // Esc key to close
         window.addEventListener('keydown', function (e) {
@@ -162,13 +162,16 @@ const pokemonRepository = (function () {
                 // New elements
                 const listItem = document.createElement('li');
                 const button = document.createElement('button');
+                button.setAttribute('data-toggle', 'modal');
+                button.setAttribute('data-target', '#infoModal');
+                listItem.classList.add('list-group-item');
 
                 // Event listener on list buttons for show details
                 addButtonEvent(button, pokemon);
 
                 // Set button text and add class
                 button.innerText = pokemon.name;
-                button.classList.add('button');
+                button.classList.add('button', 'btn');
 
                 // Append to list
                 listItem.append(button);
