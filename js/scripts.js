@@ -156,7 +156,7 @@ const pokemonRepository = (function () {
                 const button = document.createElement('button');
                 button.setAttribute('data-toggle', 'modal');
                 button.setAttribute('data-target', '#infoModal');
-                listItem.classList.add('list-group-item', 'col-2');
+                listItem.classList.add('list-group-item', 'col-6', 'col-md-3', 'col-lg-2');
 
                 // Event listener on list buttons for show details
                 addButtonEvent(button, pokemon);
