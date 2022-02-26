@@ -78,9 +78,6 @@ const pokemonRepository = (function () {
         }
 
         // ********MODAL**********
-        function hideModal() {
-                modalContainer.classList.remove('is-visible');
-        }
 
         function showModal(title, text, imgSrc) {
                 // Clear modal content
@@ -92,13 +89,6 @@ const pokemonRepository = (function () {
                 modalBody.innerText = text || '';
                 modalImage.setAttribute('src', imgSrc);
         }
-
-        // Esc key to close
-        window.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') {
-                        hideModal();
-                }
-        });
 
         // ********MODAL**********
 

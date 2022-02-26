@@ -7,28 +7,16 @@ body {
     background-color: #FFCC00;
 }
 
-
-h1 {
-    margin: 0;
+.navbar {
+    background-color: #0075BE;
 }
 
-
-ul {
-    padding: 0;
-    margin: 10px 0;
-    list-style-type: none;
-
+.navbar a {
+    color: white;
 }
-
-li {
-    display: block;
-    margin-bottom: 10px;
-}
-
 
 /* Base button styles */
 .button {
-    text-align: left;
     background-color: #0075BE;
     color: #FFCC00;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
@@ -42,7 +30,15 @@ li {
     color: white;
 }
 
+.pokemon-list li {
+    background-color: inherit;
+    border: none;
+}
+
 /* MODAL */
+.modal div {
+    border: none;
+}
 
 .modal-content {
     background-color: #FFCC00;
