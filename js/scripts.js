@@ -6,26 +6,7 @@ const pokemonRepository = (function () {
         // Search input
         const searchInput = document.querySelector('input')
 
-        searchInput.addEventListener('input', function(e){
-                const listContainer = document.querySelector('.pokemon-list');
-                // brings back full list when search box is empty
-                if(!e.target.value) {
-                        listContainer.innerHTML = '';
-                        pokemonList.forEach(function(pokemon){
-                                addListItem(pokemon)
-                        })
-                        return;
-                }
-
-
-                const newList = find(e.target.value)
-                listContainer.innerHTML = '';
-     
-                // generate new list with elements from search
-                newList.forEach(function (item) {
-                        addListItem(item)
-                })
-        })
+       
 
         // Modal bootstrap elements
         const modalContainer = document.querySelector('.modal-content')
@@ -41,6 +22,33 @@ const pokemonRepository = (function () {
                 return arr.join('');
         }
         // ****Utility functions****
+
+        function searchPokemon(event) {
+                const listContainer = document.querySelector('.pokemon-list');
+                
+                // brings back full list when search box is empty
+                if(!event.target.value) {
+                        listContainer.innerHTML = '';
+                        pokemonList.forEach(function(pokemon){
+                                addListItem(pokemon)
+                        })
+                        return;
+                }
+
+                //Use find function to get new array of matched items
+                const newList = find(event.target.value)
+
+                //Clear list current content
+                listContainer.innerHTML = '';
+     
+                // generate new list with elements from search
+                newList.forEach(function (item) {
+                        addListItem(item)
+                })
+        }
+
+        //Event for search
+        searchInput.addEventListener('input', searchPokemon)
 
         // Gets pokemon list from IIFE
         function getAll() {
